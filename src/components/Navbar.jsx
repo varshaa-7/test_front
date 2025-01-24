@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import kodeImage from '../assests/kode.png'
+import quizi from '../assests/qimg.png'
 
 const Navbar = () => {
     return (
         <div className='flex items-center justify-between py-3'>
             <Link to={"/"} className='flex items-center'>
   <img
-    src={kodeImage} // Replace this with your imported image path
+    src={quizi} // Replace this with your imported image path
     alt="Quizzy Logo"
     className="w-40 h-auto" // Increase "w-20" to "w-40" for a larger image
   />

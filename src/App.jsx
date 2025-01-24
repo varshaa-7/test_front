@@ -1,25 +1,36 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import SignUp from "./pages/SignUp"
-import LogIn from "./pages/LogIn"
-import LoggedInRoutes from "./components/LoggedInRoutes"
-import Profile from "./pages/Profile"
-import CreateQuiz from "./pages/CreateQuiz"
-import DashboardLayout from "./components/DashboardLayout"
-import CreateQuestions from "./pages/CreateQuestions"
-import AdminQuizes from "./pages/AdminQuizes"
-import AttemptQuiz from "./pages/AttemptQuiz"
-import QuizResult from "./pages/QuizResult"
-import { useSelector } from "react-redux"
-import History from "./pages/History"
+import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
+import LoggedInRoutes from "./components/LoggedInRoutes";
+import Profile from "./pages/Profile";
+import CreateQuiz from "./pages/CreateQuiz";
+import DashboardLayout from "./components/DashboardLayout";
+import CreateQuestions from "./pages/CreateQuestions";
+import AdminQuizes from "./pages/AdminQuizes";
+import AttemptQuiz from "./pages/AttemptQuiz";
+import QuizResult from "./pages/QuizResult";
+import { useSelector } from "react-redux";
+import History from "./pages/History";
+import Navbar from "./components/Navbar";
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  const [theme, setTheme] = useState("dark");
 
-  const { user } = useSelector(state => state.auth)
+  // Update the class of the <html> element based on the theme
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
 
   return (
-    <div className=" bg-slate-950 text-white">
-      <div className="max-w-[1200px] px-3 mx-auto min-h-screen ">
+    <div className="bg-slate-950 text-white min-h-screen">
+      <div className="max-w-[1200px] px-3 mx-auto min-h-screen">
+        {/* Navbar with Theme Toggle */}
+        {/* <header>
+          <Navbar theme={theme} setTheme={setTheme} />
+        </header> */}
         <Routes>
           <Route path="/" element={<LoggedInRoutes><Home /></LoggedInRoutes>} />
           <Route path="/quiz/:id" element={<LoggedInRoutes><AttemptQuiz /></LoggedInRoutes>} />
@@ -37,7 +48,7 @@ function App() {
         </Routes>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
